@@ -33,6 +33,7 @@
 */
 
 // Import da biblioteca
+const { exit } = require("process")
 const readline = require("readline")
 
 // Cria o objeto para entrada de dados
@@ -111,18 +112,19 @@ entradaDeDados.question("Digite o nome do aluno:", function(nome){
                             Typeof() -> Permite verificar o tipo de dados de uma variável
                             toFixed() -> Permite fixar a quantidade de casas decimais
                         */
-
+                        let statusAluno
                         let soma = (Number(nota1) + Number(nota2) + Number(nota3) + Number(nota4)) / Number(4)
-                        console.log(`A média do aluno ${nome} é: ${soma.toFixed(2)}`)
+                        
                     
                         if(soma >=70){
-                            console.log("Aprovado")
+                            statusAluno = "Aprovado"
                         }else if(soma < 70 && soma >=50 ){
-                            console.log("Recuperação")
+                            statusAluno = "Recuperação"
                         }else{
-                            console.log("Reprovado")
+                            statusAluno = "Reprovado"
                         }
-
+                        console.log(`\nBoletim do aluno(a): ${nome}\nSua média foi: ${soma.toFixed(2)}\nE seu status é: ${statusAluno}\n`)
+                        exit()
                     }
                 })
             })
