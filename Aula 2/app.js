@@ -103,20 +103,27 @@ entradaDeDados.question("Digite o nome do aluno:", function(nome){
                     }else{
                     /*
                         Conversão de tipos de dados
-                            parseInt() -> Permite converter uma String para número INTEIRO
-                            parseFloat() -> Permite converter uma String para número DECIMAL
-                            Number() -> Permite converter uma String para Numero (INTEIRO OU FLOAT)
-                            String() -> Permite converter um conteúdo para STRING
-                            Boolean() -> Permite converter um conteúdo para BOOLEAN
+                                parseInt() -> Permite converter uma String para número INTEIRO
+                                parseFloat() -> Permite converter uma String para número DECIMAL
+                                Number() -> Permite converter uma String para Numero (INTEIRO OU FLOAT)
+                                String() -> Permite converter um conteúdo para STRING
+                                Boolean() -> Permite converter um conteúdo para BOOLEAN
                             Typeof() -> Permite verificar o tipo de dados de uma variável
+                            toFixed() -> Permite fixar a quantidade de casas decimais
                         */
 
                         let soma = (Number(nota1) + Number(nota2) + Number(nota3) + Number(nota4)) / Number(4)
-                        console.log(`A média do aluno ${nome} é: ${soma}`)
+                        console.log(`A média do aluno ${nome} é: ${soma.toFixed(2)}`)
+                    
+                        if(soma >=70){
+                            console.log("Aprovado")
+                        }else if(soma < 70 && soma >=50 ){
+                            console.log("Recuperação")
+                        }else{
+                            console.log("Reprovado")
+                        }
+
                     }
-
-
-                
                 })
             })
         })
