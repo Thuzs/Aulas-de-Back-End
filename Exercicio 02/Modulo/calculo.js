@@ -9,7 +9,6 @@ function mais(primeiro, segundo){
     console.log(Number(cal.toFixed(2)))
     exit()
 
-
 }
 function menos(primeiro, segundo){
     let n1 = Number(primeiro)
@@ -20,7 +19,6 @@ function menos(primeiro, segundo){
     console.log(Number(cal.toFixed(2)))
     exit()
 
-
 }
 function multi(primeiro, segundo){
     let n1 = Number(primeiro)
@@ -30,7 +28,6 @@ function multi(primeiro, segundo){
 
     console.log(Number(cal.toFixed(2)))
     exit()
-
 
 }
 function dividir(primeiro, segundo){
@@ -51,6 +48,7 @@ function dividir(primeiro, segundo){
     exit()
 
 }
+
 module.exports = {
     mais,
     menos,
