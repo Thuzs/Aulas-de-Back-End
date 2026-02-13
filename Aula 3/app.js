@@ -37,7 +37,7 @@ entradaDeDados.question('Digite o nome do cliente: ', function(nome){
                     //Importa da biblioteca que
                     let calculos = require('./Modulo/calculos.js')
 
-                    let montante = calcularJurosCompostos(capitalProduto, taxaCompra, tempoPagamento)
+                    let montante = calculos.calcularJurosCompostos(capitalProduto, taxaCompra, tempoPagamento)
 
                     if(montante){
                         console.log('O montante final é: ' + montante.toFixed(2))
