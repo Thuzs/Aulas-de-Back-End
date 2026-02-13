@@ -2,7 +2,7 @@
  * Objetivo: Criar um sistema que permite calculo de juros
  * utilizando boas práticas com funções
  * Data: 11/02/2026
- * Autor: Brayan
+ * Autor: Arthur
  * Versão: 1.0 
  **********************************************************/
 //Import da biblioteca do readline
