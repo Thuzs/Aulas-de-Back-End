@@ -1,27 +1,59 @@
-function calculos(primeiro, segundo, operacao){
+const { exit } = require("node:process")
+
+function mais(primeiro, segundo){
     let n1 = Number(primeiro)
     let n2 = Number(segundo)
-    let op = operacao
+
+    let cal = n1 + n2
+
+    console.log(Number(cal.toFixed(2)))
+    exit()
 
 
+}
+function menos(primeiro, segundo){
+    let n1 = Number(primeiro)
+    let n2 = Number(segundo)
+
+    let cal = n1 - n2
+
+    console.log(Number(cal.toFixed(2)))
+    exit()
 
 
-    if(primeiro == "" || isNaN(primeiro)){
-        console.log("ERRO: A entrada de operação apenas aceita letras")
-   }else{
-    
-   }
+}
+function multi(primeiro, segundo){
+    let n1 = Number(primeiro)
+    let n2 = Number(segundo)
+
+    let cal = n1 * n2
+
+    console.log(Number(cal.toFixed(2)))
+    exit()
 
 
+}
+function dividir(primeiro, segundo){
+    let n1 = Number(primeiro)
+    let n2 = Number(segundo)
 
+    if(true){
+        //Importando biblioteca da validação do 0 na divisão
+    let calculo = require('./validaca_divisao.js')
+    let validar = calculo.val_div(primeiro, segundo)
+        validar
+    }else{
 
+    }
+    let cal = n1 / n2
 
+    console.log(Number(cal.toFixed(2)))
+    exit()
 
-
-
-
-
-    //if(operacao == "" ||!isNaN(operacao)){
-        //console.log("ERRO: A entrada de operação apenas aceita letras")
-   //}else
+}
+module.exports = {
+    mais,
+    menos,
+    multi,
+    dividir
 }
