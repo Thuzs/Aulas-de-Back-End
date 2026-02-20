@@ -7,6 +7,9 @@
 
 const readline = require('readline')
 
+//Importando biblioteca de validação de , para .
+const validacaore = require('./Modulo/replace.js')
+
 //Importando biblioteca de validação do n1
 const validacaon1 = require('./Modulo/validacao_n1.js')
 
@@ -29,17 +32,23 @@ const entradaDeDados = readline.createInterface({
 entradaDeDados.question("Digite o primeiro número: ", function(n1){
     let primeiro = n1
     
-    //Utilizando a função de validação do n1
-    let val_n1 = validacaon1.validar(primeiro)
-    val_n1
+    //Utilizando a função de replace da , para o .
+    let val_replace1 = validacaore.val_rep(primeiro)
+    
+    // Utilizando a função de validação do n1
+    let val_n1 = validacaon1.validar(val_replace1)
+   
 
     //Entrada do segundo número
     entradaDeDados.question("Digite o segundo número: ", function(n2){
         let segundo = n2
+        
+        //Utilizando a função de replace da , para o .
+        let val_replace2 = validacaore.val_rep(segundo)
 
         //Utilizando a função de validação do n2
-        let val_n2 = validacaon2.validar(segundo)
-        val_n2
+        let val_n2 = validacaon2.validar(val_replace2)
+        
 
         //Entrada da operação matemática
         entradaDeDados.question("Digite a operação matemática desejada (mais, menos, multiplicar ou dividir): ", function(op){
@@ -51,22 +60,22 @@ entradaDeDados.question("Digite o primeiro número: ", function(n1){
 
             //Utilizando a função de mais
             if(operacao.toLowerCase() == "mais"){
-                let resultado = calculo.mais(primeiro, segundo)
+                let resultado = calculo.mais(val_replace1, val_replace2)
                 resultado
                 
             //Utilizando a função de menos
             }else if(operacao.toLowerCase() == "menos"){
-                let resultado = calculo.menos(primeiro, segundo)
+                let resultado = calculo.menos(val_replace1, val_replace2)
                 resultado
 
             //Utilizando a função de multiplicação
             }else if(operacao.toLowerCase() == "multiplicar"){
-                let resultado = calculo.multi(primeiro, segundo)
+                let resultado = calculo.multi(val_replace1, val_replace2)
                 resultado
 
             //Utilizando a função de divisão
             }else if(operacao.toLowerCase() == "dividir"){
-                let resultado = calculo.dividir(primeiro, segundo)
+                let resultado = calculo.dividir(val_replace1, val_replace2)
                 resultado
 
             }
