@@ -1,9 +1,9 @@
-/***********************************************
-* Objetivo: App sistema de matemática
-*
-*
-*
-************************************************/
+/**************************************************************************************************
+ * Objetivo: Arquivo responsavel pelas funções de calcular (SOMAR, SUBTRAIR, MULTIPLICAR E DIVIDIR)
+ * Data: 13/02/2026
+ * Autor: Arthur
+ * versão 1.0
+ **************************************************************************************************/
 
 const readline = require('readline')
 
