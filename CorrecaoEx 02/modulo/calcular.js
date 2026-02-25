@@ -55,9 +55,15 @@ const subtrair      = (numero1, numero2) => Number(numero1) - Number(numero2)
 const multiplicar   = (numero1, numero2) => Number(numero1) * Number(numero2)
 const dividir       = (numero1, numero2) => Number(numero1) / Number(numero2)
 
-console.log(calcular("50", 20, 'somar'))
 
 
+module.exports = {
+    calcular,
+    somar,
+    subtrair,
+    dividir,
+    multiplicar,
+}
 // //Saída
 //if(resultado != undefined)
 //    return Number(resultado).toFixed(2)
