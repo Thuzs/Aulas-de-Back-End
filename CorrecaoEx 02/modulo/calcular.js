@@ -10,7 +10,6 @@
 const calcular = function(numero1, numero2, operador){
     let valor1              = Number(numero1)
     let valor2              = Number(numero2)
-    let resultado = false
     let operadorMatematico  = String(operador).toUpperCase()
 
     //Condicionais para validar qual o tipo de operação matemática
@@ -28,32 +27,41 @@ const calcular = function(numero1, numero2, operador){
 
     switch (operadorMatematico) {
         case "SOMAR": //if
-            resultado = valor1 + valor2
+            resultado = somar(valor1, valor2)
             break;
         case "SUBTRAIR": //else if
-            resultado = valor1 - valor2
+            resultado = subtrair(valor1, valor2)
             break;
         case "MULTIPLICAR": //else if
-            resultado = valor1 * valor2
+            resultado = multiplicar(valor1, valor2)
             break;
         case "DIVDIR": //else if
-            resultado = valor1 / valor2
+            resultado = dividir(valor1, valor2)
             break;
         default: //else   
-            return false
-
-
+        
     }
-    
-    
+
+    return resultado
+
 }    
-    console.log(calcular(10.5, 20, 'SOMAR'))
+
+
+//Exemplo de funções baseadas em SETA (Arrow function)
+//Funções para realzar as operações matemáticas
+
+const somar         = (numero1, numero2) => Number(numero1) + Number(numero2)
+const subtrair      = (numero1, numero2) => Number(numero1) - Number(numero2)
+const multiplicar   = (numero1, numero2) => Number(numero1) * Number(numero2)
+const dividir       = (numero1, numero2) => Number(numero1) / Number(numero2)
+
+console.log(calcular("50", 20, 'somar'))
 
 
 // //Saída
-// if(resultado != undefined)
-//     return Number(resultado).toFixed(2)
-// else
+//if(resultado != undefined)
+//    return Number(resultado).toFixed(2)
+//else
 //     return false
 
 
