@@ -1,3 +1,10 @@
+/***************************************************************************************************
+ * Objetivo: Arquivo responsavel por pedir seu peso e altura e trazer seu imc e a sua classificação
+ * Data 27/02/2026
+ * Autor: Arthur
+ * Versão 1.0
+***************************************************************************************************/
+
 const readline = require('readline')
 
 //Importando biblioteca de reposição da , para o . da variavel peso
