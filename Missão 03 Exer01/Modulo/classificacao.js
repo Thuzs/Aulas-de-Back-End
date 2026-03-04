@@ -16,7 +16,7 @@ function clas(imc){
         console.log(`Seu imc é de: ${imc} e a sua classificação é: Obesidade 2`)
 
     }else{
-        console.log(`Seu imc é de: ${imc} e a sua classificação é: Parabens vc é imensuravel de tão grande`)
+        console.log(`Seu imc é de: ${imc} e a sua classificação é: Obesidade 3`)
         
     }
 
