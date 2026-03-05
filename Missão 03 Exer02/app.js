@@ -7,6 +7,7 @@ const entradaDeDados = readline.createInterface({
 const validacao_nomes = require('./modulo/validacaoNome')
 const validacao_notas = require('./modulo/validacaoNota')
 const calculo_media = require('./modulo/calculo')
+const relatorio_aluno = require('./modulo/relatorio')
 
 entradaDeDados.question("Nome do aluno: ", function(aluno){
     let nomeAluno = aluno
@@ -54,20 +55,22 @@ entradaDeDados.question("Nome do aluno: ", function(aluno){
                                         
                                         let val_n4 = validacao_notas.val_nota(nota4)
 
-                                        let calcular = calculo_media.status(nota1, nota2, nota3, nota4)
-                                        
-                                        if(calcular == "recuperação"){
+                                        let media = calculo_media.calculoMedia(nota1, nota2, nota3, nota4)
+                                        let statusAluno = calculo_media.status(media)
+
+                                        if(statusAluno = "recuperação"){
                                             entradaDeDados.question("Digite a nota do aluno no exame: ", function(exame){
 
                                                 let notaExame = exame
 
                                                 let resultado = calculo_media.resultadoExame(notaExame)
 
+
+                                                let rela_aluno = relatorio_aluno.relatorioAluno(nomeAluno, nomeProf, situacao, nota1, nota2, nota3, nota4, notaExame, media)
                                             })
 
-
                                         }else{
-
+                                        let rela_aluno = relatorio_aluno.relatorioAluno(nomeAluno, nomeProf, situacao, nota1, nota2, nota3, nota4, media)
                                         }
                                     })
                                 })
