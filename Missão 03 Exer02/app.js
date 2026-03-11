@@ -57,20 +57,27 @@ entradaDeDados.question("Nome do aluno: ", function(aluno){
 
                                         let media = calculo_media.calculoMedia(nota1, nota2, nota3, nota4)
                                         let statusAluno = calculo_media.status(media)
+                                        console.log(statusAluno)
 
-                                        if(statusAluno = "recuperação"){
+                                        
+
+                                        if (statusAluno == "aprovado" || statusAluno == "reprovado"){
+
+                                            let rela_aluno = relatorio_aluno.relatorioAlunoAprovado(nomeAluno, nomeProf, situacao, nota1, nota2, nota3, nota4, media)
+                                       
+                                        }else if(statusAluno == "recuperação"){
                                             entradaDeDados.question("Digite a nota do aluno no exame: ", function(exame){
 
-                                                let notaExame = exame
+                                                
 
-                                                let resultado = calculo_media.resultadoExame(notaExame)
+                                                let resultado = calculo_media.resultadoExame(exame, media)
 
 
-                                                let rela_aluno = relatorio_aluno.relatorioAluno(nomeAluno, nomeProf, situacao, nota1, nota2, nota3, nota4, notaExame, media)
+                                                let rela_aluno = relatorio_aluno.relatorioAlunoExame(nomeAluno, nomeProf, situacao, nota1, nota2, nota3, nota4, exame, media, notaFinal)
                                             })
 
                                         }else{
-                                        let rela_aluno = relatorio_aluno.relatorioAluno(nomeAluno, nomeProf, situacao, nota1, nota2, nota3, nota4, media)
+                                        //let rela_aluno = relatorio_aluno.relatorioAluno(nomeAluno, nomeProf, situacao, nota1, nota2, nota3, nota4, media)
                                         }
                                     })
                                 })
