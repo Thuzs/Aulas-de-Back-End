@@ -1,7 +1,7 @@
 /*******************************************
  * Objetivo: Manipular dados utilizando Array e JSON
  * Data: 05/03/2026
- * Autor: Marcel
+ * Autor: Arthur
  * Versão: 1.0
  ******************************************************/
 
@@ -32,9 +32,9 @@
 */
 
 //Formar de criar um ARRAY
-const listaDeNomes       = ['Jose', 'Maria', 'João', 'André', 'Alex']
-const listaDeClientes   = []
-const listaDeFornecedores = []
+const listaDeNomes          = ['Jose', 'Maria', 'João', 'André', 'Alex', 'Carlos', 'Ana', 'Bruna', 'Jake', 'jose', 'jose', 'Jose']
+const listaDeClientes       = []
+const listaDeFornecedores   = []
 
 const exibirDados = function(){
     //Exibe o objeto array e seu conteúdo
@@ -100,13 +100,75 @@ const manipularDados = function(){
     console.log(listaDeClientes)
 
     //Permite adicionar novos valores no ARRAY, sempre no final da lista
-    listaDeFornecedores.push('Luiza da Silva')
+    listaDeFornecedores.push('Luiz da Silva')
     listaDeFornecedores.push('Zezinho da Sivla')
     listaDeFornecedores.push('Huguinho da Silva')
     listaDeFornecedores.push('Luizinho da Silva', 'André da Silva', 'Carlos da Silva')
 
-    console.log(listaDeFornecedores)
+    console.table(listaDeFornecedores)
+
+    //Permite adicionar novos elementos no array sempre no inicio
+    listaDeFornecedores.unshift('Ana Carolina')
+    console.table(listaDeFornecedores)
+
+    //Permite remover elementos do final da lista
+    listaDeFornecedores.pop()
+    console.table(listaDeFornecedores)
+
+    //Permite remover elementos no inicio da lista
+    listaDeFornecedores.shift()
+    console.table(listaDeFornecedores)
+
+    //Permite remover um elemento baseado no indice da lista
+                     // splice(a partir do indice, quantos indices vao ser apagados a partir do primeiro)
+    listaDeFornecedores.splice(2, 1)
+    console.table(listaDeFornecedores)
 }
 
+const removerItem = function(nome){
+
+    // for(indice in listaDeNomes){
+    //      if(listaDeNomes[indice] == nome){
+    //          listaDeNomes.splice(indice, 1)
+    //      }
+    // }
+    
+    //Retorna o indice de um elemento fazendo a busca pelo conteudo
+    //Se o indexof não encontrar o conteúdo ele devolve -1
+    let indice = listaDeNomes.indexOf(nome)
+    if(indice != -1){
+        listaDeNomes.splice(indice,1)
+        return true
+    }else{
+        return false
+    }
+}
+
+const verificarItem = function(nome){
+    //Verifica a existencia de um conteúdo dentro de uma lista (true/false)
+    return listaDeNomes.includes(nome)
+    
+}
+
+const quantidadeDeitens = function(nome){
+    let = cont = 0
+    listaDeNomes.forEach(function(item){
+        if(String(item).toUpperCase() == String(nome).toUpperCase())
+            cont +=1
+    })
+
+    return cont
+}
 //exibirDados()
-manipularDados()
+//manipularDados()
+//console.table(listaDeNomes)
+// let resposta = removerItem('Maria')
+
+// if(resposta)
+//     console.log("item removido com sucesso.")
+// else
+//     console.log('Não foram encontrados itens para ser removido')
+
+// console.table(listaDeNomes)
+
+console.log(quantidadeDeitens('jose'))
