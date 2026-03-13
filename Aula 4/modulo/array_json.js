@@ -250,14 +250,23 @@ const cadastroDeProdutos = function(){
     // console.log(produtos)
     // console.log(produtos[0].cor)
     // console.log(produtos[0].cor[1].nome)
-    console.table(produtos)
-
+    produtos.forEach(function(nomeProduto, quantidade, val, nomeCor, marca){
+        console.log("Produto: " + nomeProduto.nome,
+            "Quantidade: " + quantidade.qtde,
+            "Valor: " + val.valor,
+            // "Cores: " + nomeCor.cores,
+            // "Marca: " + marca.marca
+        )
+    })
+    
 //     produtos[0].cor.forEach(function(nomeCor){
 //         console.log("A cor do produtos é:" + nomeCor.nome)
 //     })
 }
 
 cadastroDeProdutos()
+
+
 //console.log(quantidadeDeitens('jose'))
 //exibirDados()
 //manipularDados()
