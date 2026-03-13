@@ -119,9 +119,14 @@ const manipularDados = function(){
     listaDeFornecedores.shift()
     console.table(listaDeFornecedores)
 
-    //Permite remover um elemento baseado no indice da lista
+    //Splice() -> Permite remover um elemento baseado no indice da lista
                      // splice(a partir do indice, quantos indices vao ser apagados a partir do primeiro)
     listaDeFornecedores.splice(2, 1)
+    console.table(listaDeFornecedores)
+
+    //Splie() -> Permite adicionar um novo elemento em um determinado lugar do array
+                            //Indice, 0 -> significa que não será removido ninguém, Novo contéudo 
+    listaDeFornecedores.splice(2,0,'Carlos da Silva')
     console.table(listaDeFornecedores)
 }
 
@@ -159,6 +164,101 @@ const quantidadeDeitens = function(nome){
 
     return cont
 }
+
+const criandoDadosJSON = function(){
+    let aluno = {   'nome': 'José',
+                    'ra': 123456,
+                    'telefone': "40028922",
+                    'email': 'jose@gmail.com'
+                }
+    
+    //Exibindo o objeto JSON completo
+    console.log(aluno)
+    console.table(aluno)
+
+    //Exibiindo apenas um atributo do JSON
+    console.log(aluno.nome)
+    console.log(aluno.email)
+    
+    //Adiciona um novo atributo no JSON
+    aluno.sexo = 'Masculino'
+    console.log(aluno)
+
+    //Remove um atributo especifico
+    delete aluno.telefone
+    console.log(aluno)
+}
+
+const cadastroDeProdutos = function(){
+    let cores = [   
+        {"id": 1, "nome": "Branco"},//Indice 0
+        {"id": 2, "nome": "Preto"}, //Indice 1
+        {"id": 3, "nome": "Azul"},  //Indice 2
+        {"id": 4, "nome": "Rosa"},  //Indice 3
+        {"id": 5, "nome": "Cinza"}  //Indice 4
+    ]
+
+    let marcas = [
+        {"id": 1, "marca": "LG",        'telefone': "40028922", 'email': 'lg@gmail.com'},
+        {"id": 2, "marca": "Dell",      'telefone': "40724626", 'email': 'dell@gmail.com'},
+        {"id": 3, "marca": "Lenovo",    'telefone': "41517922", 'email': 'lenovo@gmail.com'},
+        {"id": 4, "marca": "Apple",     'telefone': "26266922", 'email': 'apple@gmail.com'},
+        {"id": 5, "marca": "Razer",     'telefone': "31528922", 'email': 'razer@gmail.com'},
+        {"id": 6, "marca": "Logitech",  'telefone': "25331522", 'email': 'logitech@gmail.com'},
+        {"id": 7, "marca": "Multilaser",'telefone': "40064272", 'email': 'multilaser@gmail.com'}
+    ]
+
+    let produtos = [
+        {   "id": 1, 
+            "nome": "Monitor", 
+            "descricao": "27 polegadas",
+            "marca": marcas[1].marca,
+            "qtde": 20,
+            "cor": [ 
+                cores[4],
+                cores[1]
+            ],
+            "valor": 800.50
+        },
+        {
+            "id": 2,
+            "nome": "Teclado",
+            "decricao": "Teclado mecânico RGB",
+            "marca": marcas[5].marca,
+            "qtde": 200,
+            "cor": cores,
+            "valor": 150
+        },
+        {
+            "id": 3,
+            "nome": "Mouse",
+            "decricao": "Mouse RGB",
+            "marca": [
+                        marcas[0].marca,
+                        marcas[1].marca,
+                        marcas[5].marca
+                     ],
+            "qtde": 500,
+            "cor":  [
+                    cores[0],
+                    cores[1],
+                    cores[3]
+                    ],
+            "valor": 80
+        }
+    ]
+    // console.log(produtos)
+    // console.log(produtos[0].cor)
+    // console.log(produtos[0].cor[1].nome)
+    console.table(produtos)
+
+//     produtos[0].cor.forEach(function(nomeCor){
+//         console.log("A cor do produtos é:" + nomeCor.nome)
+//     })
+}
+
+cadastroDeProdutos()
+//console.log(quantidadeDeitens('jose'))
 //exibirDados()
 //manipularDados()
 //console.table(listaDeNomes)
@@ -170,5 +270,3 @@ const quantidadeDeitens = function(nome){
 //     console.log('Não foram encontrados itens para ser removido')
 
 // console.table(listaDeNomes)
-
-console.log(quantidadeDeitens('jose'))
