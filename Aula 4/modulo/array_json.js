@@ -192,19 +192,19 @@ const criandoDadosJSON = function(){
 const cadastroDeProdutos = function(){
     let cores = [   
         {"id": 1, "nome": "Branco"},//Indice 0
-        {"id": 2, "nome": "Preto"}, //Indice 1
-        {"id": 3, "nome": "Azul"},  //Indice 2
-        {"id": 4, "nome": "Rosa"},  //Indice 3
-        {"id": 5, "nome": "Cinza"}  //Indice 4
+        {"id": 2, "nome": "Preto" },//Indice 1
+        {"id": 3, "nome": "Azul"  },//Indice 2
+        {"id": 4, "nome": "Rosa"  },//Indice 3
+        {"id": 5, "nome": "Cinza" } //Indice 4
     ]
 
     let marcas = [
-        {"id": 1, "marca": "LG",        'telefone': "40028922", 'email': 'lg@gmail.com'},
-        {"id": 2, "marca": "Dell",      'telefone': "40724626", 'email': 'dell@gmail.com'},
-        {"id": 3, "marca": "Lenovo",    'telefone': "41517922", 'email': 'lenovo@gmail.com'},
-        {"id": 4, "marca": "Apple",     'telefone': "26266922", 'email': 'apple@gmail.com'},
-        {"id": 5, "marca": "Razer",     'telefone': "31528922", 'email': 'razer@gmail.com'},
-        {"id": 6, "marca": "Logitech",  'telefone': "25331522", 'email': 'logitech@gmail.com'},
+        {"id": 1, "marca": "LG",        'telefone': "40028922", 'email': 'lg@gmail.com'        },
+        {"id": 2, "marca": "Dell",      'telefone': "40724626", 'email': 'dell@gmail.com'      },
+        {"id": 3, "marca": "Lenovo",    'telefone': "41517922", 'email': 'lenovo@gmail.com'    },
+        {"id": 4, "marca": "Apple",     'telefone': "26266922", 'email': 'apple@gmail.com'     },
+        {"id": 5, "marca": "Razer",     'telefone': "31528922", 'email': 'razer@gmail.com'     },
+        {"id": 6, "marca": "Logitech",  'telefone': "25331522", 'email': 'logitech@gmail.com'  },
         {"id": 7, "marca": "Multilaser",'telefone': "40064272", 'email': 'multilaser@gmail.com'}
     ]
 
@@ -212,9 +212,9 @@ const cadastroDeProdutos = function(){
         {   "id": 1, 
             "nome": "Monitor", 
             "descricao": "27 polegadas",
-            "marca": marcas[1].marca,
+            "marca": marcas[0].marca,
             "qtde": 20,
-            "cor": [ 
+            "cor": [
                 cores[4],
                 cores[1]
             ],
@@ -247,24 +247,48 @@ const cadastroDeProdutos = function(){
             "valor": 80
         }
     ]
-    // console.log(produtos)
-    // console.log(produtos[0].cor)
-    // console.log(produtos[0].cor[1].nome)
-    produtos.forEach(function(nomeProduto, quantidade, val, nomeCor, marca){
-        console.log("Produto: " + nomeProduto.nome,
-            "Quantidade: " + quantidade.qtde,
-            "Valor: " + val.valor,
-            // "Cores: " + nomeCor.cores,
-            // "Marca: " + marca.marca
-        )
-    })
-    
-//     produtos[0].cor.forEach(function(nomeCor){
+    //     produtos[0].cor.forEach(function(nomeCor){
 //         console.log("A cor do produtos é:" + nomeCor.nome)
 //     })
-}
+    produtos.forEach(function(itemProduto){
+        console.log(`Produto:  ${itemProduto.nome}`)
 
+        itemProduto.marca.forEach(function(itemMarca){
+            console.log(`   Marca: ${itemMarca}`)
+        })
+
+        //Percorre o objeto de cor dentro de cada produto, para trazer as cores
+        itemProduto.cor.forEach(function(itemCor){
+            console.log(`   Cor: ${itemCor.cor}`)
+
+        })
+        
+    })
+
+         //Pesquisando o produto pelo nome
+         console.log("Pesquisando os produtos pelo nome")
+         let nome = 'Mouse sem fio'
+    
+         produtos.forEach(function(itemProduto){
+            if(String(itemProduto.nome).toUpperCase() == String(nome).toUpperCase())
+                console.log(itemProduto)
+         })
+    
+         //Pesquisando produtos pela cor
+         console.log("Pesquisando produtos pela cor")
+    
+         let cor = 'laranja'
+
+         produtos.forEach(function(itemProduto){
+            itemProduto.cor.forEach(function(itemCor){
+                if(String(itemCor.cor).toUpperCase() == String(cor).toUpperCase())
+                    console.log(itemProduto)
+            })
+         })
+}
 cadastroDeProdutos()
+
+
 
 
 //console.log(quantidadeDeitens('jose'))
