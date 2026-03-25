@@ -59,7 +59,7 @@ const getEstadosRegiao = function (regiao) {
         "estados": []
     }
 
-    dados.listaDeEstados.estados.forEach(function(filtro){
+    dados.listaDeEstados.estados.forEach(function(filtro) {
       
         if(String(regiao).toUpperCase() == String(filtro.regiao).toUpperCase()){
             exibirDados.estados.push({
@@ -100,54 +100,32 @@ function getCapitalPais(){
 }
 
 const getCidades = function(estado){
+    let cidadesFiltro = []
 
     dados.listaDeEstados.estados.forEach(function(filtro){
-    
-const exibirDados ={
-    "uf": estado.toUpperCase(),
-    "descricao": filtro.nome,
-    "Quantidade": filtro.cidades.length(),
-    "cidades": []
-}
-
-    
-        if(String(estado).toUpperCase() == String(filtro.estado).toUpperCase()){
-            exibirDados.cidades.push({
-                "cidades": filtro.estados.cidades
+        
+        if(String(estado).toUpperCase() == String(filtro.sigla).toUpperCase()){
+            filtro.cidades.forEach(function(item){
+                cidadesFiltro.push(
+                    item.nome
+                )
             })
+            
+            const exibirDados ={
+                "uf": estado,
+                "descricao": filtro.nome,
+                "Quantidade_cidades": filtro.cidades.length,
+                "cidades": cidadesFiltro
+            }
 
-    
+            console.log(exibirDados)
         }
-
+        
     })
-    console.log(exibirDados)
+    
 }
-
-
-
-getCidades('SP')
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    
+getCidades('BA')
 
 module.exports ={
     getListaDeEstados,
@@ -155,6 +133,7 @@ module.exports ={
     getCapitalEstado,
     getEstadosRegiao,
     getCapitalPais,
+    getCidades
     
 
 }
