@@ -22,14 +22,22 @@ entradaDeDados.question("Nome do aluno: ", function(aluno){
         entradaDeDados.question("Sexo do professor: ", function(sexo){
             let sexoProf = sexo
 
+            let valSexo = validacao_nomes.val_nome(sexoProf)
+
             entradaDeDados.question("Sexo do aluno: ", function(sex){
                 let sexoAluno = sex
+
+                let valSexo = validacao_nomes.val_nome(sexoAluno)
 
                 entradaDeDados.question("Nome do curso: ", function(curso){
                     let nomCurso = curso
 
+                    let valCurso = validacao_nomes.val_nome(nomCurso)
+
                     entradaDeDados.question("Qual é o nome da disciplina: ", function(dis){
                         let disciplina = dis
+
+                        let valDisci = validacao_nomes.val_nome(disciplina)
 
                         // Entrada nota 1
                         entradaDeDados.question("Digite a primeira nota: ", function(valor1){ 
@@ -63,17 +71,16 @@ entradaDeDados.question("Nome do aluno: ", function(aluno){
 
                                         if (statusAluno == "aprovado" || statusAluno == "reprovado"){
 
-                                            let rela_aluno = relatorio_aluno.relatorioAlunoAprovado(nomeAluno, nomeProf, situacao, nota1, nota2, nota3, nota4, media)
+                                            let rela_aluno = relatorio_aluno.relatorioAlunoAprovado(nomeAluno, nomeProf, situacao, disciplina, nomCurso, nota1, nota2, nota3, nota4, media)
                                        
                                         }else if(statusAluno == "recuperação"){
                                             entradaDeDados.question("Digite a nota do aluno no exame: ", function(exame){
 
                                                 
-
                                                 let resultado = calculo_media.resultadoExame(exame, media)
 
 
-                                                let rela_aluno = relatorio_aluno.relatorioAlunoExame(nomeAluno, nomeProf, situacao, nota1, nota2, nota3, nota4, exame, media, notaFinal)
+                                                let rela_aluno = relatorio_aluno.relatorioAlunoExame(nomeAluno, nomeProf, situacao, disciplina, nomCurso, nota1, nota2, nota3, nota4, exame, media, notaFinal)
                                             })
 
                                         }else{

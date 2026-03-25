@@ -1,9 +1,9 @@
 const { exit } = require("node:process")
 
-function val_nome(nomeAluno, nomeProf){
+function val_nome(nomeAluno){
 
-if(nomeAluno == '' || !isNaN(nomeAluno) || nomeProf == '' ||  !isNaN(nomeProf) ){
-    console.log('ERRO: É obrigatório o preenchimento de forma correta do nome !!!')
+if(nomeAluno == '' || !isNaN(nomeAluno)){
+    console.log('ERRO: É obrigatório o preenchimento de forma correta nessa entrada !!!')
     exit()
 }else{}
 }
