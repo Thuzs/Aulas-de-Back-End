@@ -20,20 +20,20 @@ function status(){
 
 function resultadoExame(exame, media){
 notaFinal = (Number(exame) + Number(media)) / Number(2)
-console.log(exame)
 return notaFinal
 
 }
-// if(notaFinal > 60 ){
-//     return "aprovado no exame"
-    
-// }else{
-//     return "reprovado no exame"
-    
-// }
-
+function statusExame(){
+    if(notaFinal > 60 ){
+        return "aprovado no exame"
+        
+    }else{
+        return "reprovado no exame"
+    }
+}
 module.exports ={
     calculoMedia,
     status,
-    resultadoExame
+    resultadoExame,
+    statusExame
 }

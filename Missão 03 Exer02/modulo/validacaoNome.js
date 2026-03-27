@@ -7,7 +7,23 @@ if(nomeAluno == '' || !isNaN(nomeAluno)){
     exit()
 }else{}
 }
+function sexo_aluno(sexoAluno){
+    if(sexoAluno != "feminino"){
+        return "aluno"
+    }else{
+        return "aluna"
+    }
+}
+function sexo_prof(sexoProf){
+    if(sexoProf != "feminino"){
+        return "professor"
+    }else{
+        return "professora"
+    }
+}
 
 module.exports ={
-    val_nome
+    val_nome,
+    sexo_aluno,
+    sexo_prof
 }

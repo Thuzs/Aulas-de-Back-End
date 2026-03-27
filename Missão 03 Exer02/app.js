@@ -23,11 +23,13 @@ entradaDeDados.question("Nome do aluno: ", function(aluno){
             let sexoProf = sexo
 
             let valSexo = validacao_nomes.val_nome(sexoProf)
+            let profSexo = validacao_nomes.sexo_prof(sexoProf)
 
             entradaDeDados.question("Sexo do aluno: ", function(sex){
                 let sexoAluno = sex
 
                 let valSexo = validacao_nomes.val_nome(sexoAluno)
+                let alunoSexo = validacao_nomes.sexo_aluno(sexoAluno)
 
                 entradaDeDados.question("Nome do curso: ", function(curso){
                     let nomCurso = curso
@@ -65,27 +67,27 @@ entradaDeDados.question("Nome do aluno: ", function(aluno){
 
                                         let media = calculo_media.calculoMedia(nota1, nota2, nota3, nota4)
                                         let statusAluno = calculo_media.status(media)
-                                        console.log(statusAluno)
+                                        
 
                                         
 
                                         if (statusAluno == "aprovado" || statusAluno == "reprovado"){
 
-                                            let rela_aluno = relatorio_aluno.relatorioAlunoAprovado(nomeAluno, nomeProf, situacao, disciplina, nomCurso, nota1, nota2, nota3, nota4, media)
-                                       
+                                            let rela_aluno = relatorio_aluno.relatorioAlunoAprovado(nomeAluno, nomeProf,profSexo, alunoSexo, situacao, disciplina, nomCurso, nota1, nota2, nota3, nota4, media)
+                                    
                                         }else if(statusAluno == "recuperação"){
                                             entradaDeDados.question("Digite a nota do aluno no exame: ", function(exame){
-
+                                                
                                                 
                                                 let resultado = calculo_media.resultadoExame(exame, media)
 
+                                                let status_exame = calculo_media.statusExame(resultado)
 
-                                                let rela_aluno = relatorio_aluno.relatorioAlunoExame(nomeAluno, nomeProf, situacao, disciplina, nomCurso, nota1, nota2, nota3, nota4, exame, media, notaFinal)
+                                                let rela_aluno = relatorio_aluno.relatorioAlunoExame(nomeAluno, nomeProf, profSexo, alunoSexo, status_exame, disciplina, nomCurso, nota1, nota2, nota3, nota4, exame, media, notaFinal)
                                             })
 
-                                        }else{
-                                        //let rela_aluno = relatorio_aluno.relatorioAluno(nomeAluno, nomeProf, situacao, nota1, nota2, nota3, nota4, media)
                                         }
+                                    
                                     })
                                 })
                             })
