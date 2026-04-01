@@ -19,35 +19,32 @@ function getListaDeEstados() {
 
 //Função para retornar as informações de um estado escolhido
 const getDadosEstados = function (estado) {
-    dados.listaDeEstados.estados.forEach(function(filtro) {
-        if(String(estado).toUpperCase() == String(filtro.sigla).toUpperCase()){
-            const exibirDados = {
-                "uf": filtro.sigla,
-                "descricao": filtro.nome,
-                "capital": filtro.capital,
-                "regiao": filtro.regiao
+
+        let exibirDados = false
+        dados.listaDeEstados.estados.forEach(function(filtro) {
+            if(String(estado).toUpperCase() == String(filtro.sigla).toUpperCase()){
+                    exibirDados = {
+                    "uf": filtro.sigla,
+                    "descricao": filtro.nome,
+                    "capital": filtro.capital,
+                    "regiao": filtro.regiao
+                }
             }
-            return exibirDados
-        }else{
-            return false
-        } 
-    })  
+        })
+    return exibirDados
 }
 
 //Função para retornar as informações da capital do estado selecionado
 const getCapitalEstado = function (estado) {
-
+    let exibirDados = false
     dados.listaDeEstados.estados.forEach(function(filtro){
         if(String(estado).toUpperCase() == String(filtro.sigla).toUpperCase()){
-            const exibirDados = {
+            exibirDados = {
                 "uf": filtro.sigla, "descricao": filtro.nome, "capital": filtro.capital
             }
-            return exibirDados
-
-        }else{
-            return false
         } 
     })
+    return exibirDados
 }
 
 //Função para retornar os estados da região selecionada
@@ -63,12 +60,11 @@ const getEstadosRegiao = function (regiao) {
             exibirDados.estados.push({
                 "uf": filtro.sigla, "descricao": filtro.nome
             })
-              
+              return exibirDados
         }else{
             return false
         }
     })
-    return exibirDados
 }
 
 //Função para retornar a capital e as antigas capitais do Brasil
@@ -89,9 +85,13 @@ function getCapitalPais(){
                 "capital_pais_ano_inicio": filtro.capital_pais.ano_inicio,
                 "capital_pais_ano_termino": filtro.capital_pais.ano_fim
             })
+            return exibirDados
+
+        }else{
+            return false
         }
     })
-    return exibirDados
+    
 
 }
 
@@ -115,6 +115,9 @@ const getCidades = function(estado){
             }
 
             return exibirDados
+
+        }else{
+            return false
         }
         
     })
