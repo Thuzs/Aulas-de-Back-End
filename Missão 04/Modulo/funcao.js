@@ -124,17 +124,13 @@ const getCidades = function(estado){
     })
     
 }
-    
-getCidades('BA')
 
-module.exports ={
+module.exports = {
     getListaDeEstados,
     getDadosEstados,
     getCapitalEstado,
     getEstadosRegiao,
     getCapitalPais,
     getCidades
-    
-
 }
 
