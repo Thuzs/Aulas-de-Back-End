@@ -178,6 +178,7 @@ app.get("/v1/senai/help", function(request, response){
             }
         ]
     }
+    response.json(docAPI)
 })
 
 //Serve para inicializar a API para receber requisições
