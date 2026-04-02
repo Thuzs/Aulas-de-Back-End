@@ -49,22 +49,29 @@ const getCapitalEstado = function (estado) {
 
 //Função para retornar os estados da região selecionada
 const getEstadosRegiao = function (regiao) {
-    const exibirDados = {
-        "regiao": regiao.toUpperCase(),
-        "estados": []
-    }
 
-    dados.listaDeEstados.estados.forEach(function(filtro) {
-      
+    let condicao = false
+    let exibirDados = false
+
+    dados.listaDeEstados.estados.forEach(function(filtro){
         if(String(regiao).toUpperCase() == String(filtro.regiao).toUpperCase()){
+            if(!condicao){
+                exibirDados = {
+                    "regiao": regiao.toUpperCase(),
+                    "estados": []
+                }
+                condicao = true
+                
+            }
             exibirDados.estados.push({
                 "uf": filtro.sigla, "descricao": filtro.nome
             })
-              return exibirDados
-        }else{
-            return false
+              
         }
+        
     })
+    return exibirDados
+    
 }
 
 //Função para retornar a capital e as antigas capitais do Brasil
@@ -85,18 +92,15 @@ function getCapitalPais(){
                 "capital_pais_ano_inicio": filtro.capital_pais.ano_inicio,
                 "capital_pais_ano_termino": filtro.capital_pais.ano_fim
             })
-            return exibirDados
-
-        }else{
-            return false
         }
     })
-    
-
+    return exibirDados
 }
 
 const getCidades = function(estado){
     let cidadesFiltro = []
+
+    let exibirDados = false
 
     dados.listaDeEstados.estados.forEach(function(filtro){
         
@@ -107,20 +111,18 @@ const getCidades = function(estado){
                 )
             })
             
-            const exibirDados ={
+            exibirDados ={
                 "uf": estado,
                 "descricao": filtro.nome,
                 "Quantidade_cidades": filtro.cidades.length,
                 "cidades": cidadesFiltro
             }
 
-            return exibirDados
-
-        }else{
-            return false
+        
         }
         
     })
+    return exibirDados
     
 }
 
