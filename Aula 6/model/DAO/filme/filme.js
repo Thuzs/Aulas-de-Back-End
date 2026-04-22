@@ -36,6 +36,8 @@ const insertFilme = async function(filme){
                 '${filme.capa}'
                 );`
 
+
+
     //Executar o scriptSQL no banco de dados
     let result = await knexConex.raw(sql)
 
