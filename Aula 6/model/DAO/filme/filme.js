@@ -17,6 +17,7 @@ const knexConex = knex(knexConfig.development)
 
 //Função para inserir dados na tabela de filme
 const insertFilme = async function(filme){
+    try {
     let sql = `insert into tbl_filme (
                 nome, 
                 data_lancamento, 
@@ -31,7 +32,7 @@ const insertFilme = async function(filme){
                 '${filme.data_lancamento}',
                 '${filme.duracao}',
                 '${filme.sinopse}',
-                '${filme.avaliacao}',
+                if('${filme.avaliacao}' = "", null, '${filme.avaliacao}'),
                 '${filme.valor}',
                 '${filme.capa}'
                 );`
@@ -45,7 +46,12 @@ const insertFilme = async function(filme){
         return true
     else
         return false
+    } catch (error){
+        //console.log(error)
+        return false
+    }
 }
+
 
 //Função para atualizar um filme existente na tabela
 const updateFilme = async function(filme){
