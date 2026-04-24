@@ -70,7 +70,7 @@ const selectAllFilme = async function(){
         //Validação para verificar se o ternoro no BD retorno no BD é um array
         //Se o scriptSQL der erro, não devolve um array
         if(Array.isArray(result)){
-            return result
+            return result[0]
         }else{
             return false
         }
@@ -78,9 +78,22 @@ const selectAllFilme = async function(){
         return false
     }
 }
-selectAllFilme()
+
 //Função para retornar os dados do filme, filtrando pelo id
 const selectByIdFilme = async function(id){
+    try {
+        let sql = `select * from tbl_filme where id=${id}`
+
+        let result = await knexConex.raw(sql)
+
+        if(Array.isArray(result)){
+            return result[0]
+        }else{
+            return false
+        }
+    }catch (error) {
+        return false
+    }
 }
 
 //Função para excluir um filme pelo id
