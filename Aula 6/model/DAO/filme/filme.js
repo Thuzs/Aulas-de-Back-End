@@ -47,7 +47,6 @@ const insertFilme = async function(filme){
     else
         return false
     } catch (error){
-        //console.log(error)
         return false
     }
 }
@@ -74,7 +73,6 @@ const updateFilme = async function(filme){
             else
                 return false
         } catch (error) {
-            console.log(error)
             return false
         }
 
@@ -120,7 +118,21 @@ const selectByIdFilme = async function(id){
 
 //Função para excluir um filme pelo id
 const deleteFiltro = async function(id){
+    try {
+        let sql = `delete from tbl_filme 
+                    where id = ${id};`
+
+        let result = await knexConex.raw(sql)
+
+        if(result)
+            return true
+        else
+            return false
+    }catch (error) {
+        return false
+    }
 }
+
 
 module.exports = {
     insertFilme,

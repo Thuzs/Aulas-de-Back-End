@@ -25,7 +25,7 @@ const inserirNovoFilme = async function(filme, contentType){
     try{
 
     //Se a função validar o retornar um json de erro, iremoes deolver ao APP;
-    let validar = await validardados(filme, contentType)
+    let validar = await validarDados(filme, contentType)
         if(validar){
             return validar
         }else{
@@ -168,7 +168,31 @@ const buscarFilme = async function(id){
 }
 
 //Função para excluir o filme
-const excluirFilme = async function(){
+const excluirFilme = async function(id){
+    let message = JSON.parse(JSON.stringify(config_message))
+
+    try{
+        let resultBuscarID = await buscarFilme(id)
+
+        if(resultBuscarID.status){
+
+                let result = await filmeDAO.deleteFiltro(id)
+
+                if(result){
+                    message.DEFAULT_MESSAGE.status      = message.SUCESS_DELETE_ITEM.status
+                    message.DEFAULT_MESSAGE.status_code = message.SUCESS_DELETE_ITEM.status_code
+                    message.DEFAULT_MESSAGE.message     = message.SUCESS_DELETE_ITEM.message
+
+                    return message.DEFAULT_MESSAGE // 200 (Deletado)
+                }else{
+                    return message.ERROR_INTERNAL_SERVER_MODEL //500
+                }
+        }else{
+            return resultBuscarID // 400 ou 404 ou 500
+        }
+    }catch (error){
+        return message.ERROR_INTERNAL_SERVER_CONTROLLER //500 (Controller)
+    }
 }
 
 //Função para validar todos os dados do filmes (obrigatório, qtde de caracteres, etc)
@@ -219,6 +243,7 @@ module.exports = {
     validarDados,
     listarFilme,
     buscarFilme,
-    atualizarFilme
+    atualizarFilme,
+    excluirFilme
     
 }
