@@ -23,8 +23,9 @@ const ERROR_CONTENT_TYPE                    = {status: false, status_code: 415, 
 const ERROR_NOT_FOUND                       = {status: false, status_code: 404, message: "Não foi encontrado nenhum dado para retorno"} 
 
 //Mensagem de Sucesso da API
-const SUCESS_CREATED_ITEM = {status: true, status_code: 201, message: 'Registro inserido com sucesso'}
-const SUCESS_RESPONSE = {status: true, status_code: 200}
+const SUCESS_CREATED_ITEM = {status: true, status_code: 201, message: 'Registro inserido com sucesso'} // Mensagem de sucesso da api
+const SUCESS_RESPONSE = {status: true, status_code: 200} //retorno para get 200
+const SUCESS_UPDATED_ITEM =  {status: true, status_code: 200, message: 'Registro atualizado com sucesso'} //retorno para put 200
 
 module.exports = {
     DEFAULT_MESSAGE,
@@ -34,5 +35,6 @@ module.exports = {
     ERROR_INTERNAL_SERVER_MODEL,
     ERROR_NOT_FOUND,
     SUCESS_CREATED_ITEM,
-    SUCESS_RESPONSE  
+    SUCESS_RESPONSE,
+    SUCESS_UPDATED_ITEM
 }
