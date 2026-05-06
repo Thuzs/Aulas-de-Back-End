@@ -142,7 +142,7 @@ const buscarFilme = async function(id){
 
     //Validação para garantir que o ID seja válido
     try {
-        if(id == "" || id == null || id == undefined || isNaN(id)){
+        if(id == undefined || id == null || id == '' || isNaN(id)){
             message.ERROR_BAD_REQUEST.field = "[ID] INVALIDO"
             return message.ERROR_BAD_REQUEST //400
         }else {
@@ -203,19 +203,19 @@ const validarDados = async function(filme, contentType){
     if(String(contentType).toUpperCase() == 'APPLICATION/JSON'){
 
     //Validação de dados para os atributos do Filme (status 400)
-        if(filme.nome == '' || filme.nome == null || filme.nome == undefined || filme.nome.length > 80){
+        if(filme.nome == undefined || filme.nome == null || filme.nome == '' || filme.nome.length > 80){
             message.ERROR_BAD_REQUEST.field = '[NOME] INVÁLIDO'
             return message.ERROR_BAD_REQUEST
 
-        }else if(filme.data_lancamento == '' || filme.data_lancamento == null || filme.data_lancamento == undefined || filme.data_lancamento.length != 10){
+        }else if(filme.data_lancamento == undefined || filme.data_lancamento == null || filme.data_lancamento == '' || filme.data_lancamento.length != 10){
             message.ERROR_BAD_REQUEST.field = '[DATA-LANCAMENTO] INVÁLIDO'
             return message.ERROR_BAD_REQUEST
 
-        }else if(filme.duracao == '' || filme.duracao == null || filme.duracao == undefined || filme.duracao.length < 5){
+        }else if(filme.duracao == undefined || filme.duracao == null || filme.duracao == '' || filme.duracao.length < 5){
             message.ERROR_BAD_REQUEST.field = '[DURACAO] INVÁLIDO'
             return message.ERROR_BAD_REQUEST
 
-        }else if(filme.sinopse == '' || filme.sinopse == null || filme.sinopse == undefined){
+        }else if(filme.sinopse == undefined || filme.sinopse == null || filme.sinopse == ''){
             message.ERROR_BAD_REQUEST.field = '[SINOPSE] INVÁLIDO'
             return message.ERROR_BAD_REQUEST
 
@@ -223,7 +223,7 @@ const validarDados = async function(filme, contentType){
             message.ERROR_BAD_REQUEST.field = '[AVALIACAO] INVÁLIDO'
             return message.ERROR_BAD_REQUEST
 
-        }else if(filme.valor == '' || filme.valor == null || filme.valor == undefined || filme.valor.split('.')[0].length > 3 || isNaN(filme.valor)){
+        }else if(filme.valor == undefined || filme.valor == null || filme.valor == '' || filme.valor.split('.')[0].length > 3 || isNaN(filme.valor)){
             message.ERROR_BAD_REQUEST.field = '[VALOR] INVÁLIDO'
             return message.ERROR_BAD_REQUEST
 
