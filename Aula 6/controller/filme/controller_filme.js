@@ -32,10 +32,15 @@ const inserirNovoFilme = async function(filme, contentType){
             //Encaminha os dados do filme par ao DAO
             let result = await filmeDAO.insertFilme(filme)
 
+
             if(result){ //201
+                //Criando o atributo ID no JSON do filme e colocando
+                //o ID gerado após o insert
+                filme.id = result
                 message.DEFAULT_MESSAGE.status      = message.SUCESS_CREATED_ITEM.status
                 message.DEFAULT_MESSAGE.status_code = message.SUCESS_CREATED_ITEM.status_code
                 message.DEFAULT_MESSAGE.message     = message.SUCESS_CREATED_ITEM.message
+                message.DEFAULT_MESSAGE.response    = filme
             }else{ //500
                 return message.ERROR_INTERNAL_SERVER_MODEL //500 (model)
             }
