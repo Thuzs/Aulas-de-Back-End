@@ -172,10 +172,12 @@ const excluirFilme = async function(id){
     let message = JSON.parse(JSON.stringify(config_message))
 
     try{
+        //Validação do erro 400 e 404
         let resultBuscarID = await buscarFilme(id)
 
+        //Validação para verificar se o status é verdadreito (se existe o filme)
         if(resultBuscarID.status){
-
+                //Chama a função do DAO para excluir o filme
                 let result = await filmeDAO.deleteFiltro(id)
 
                 if(result){

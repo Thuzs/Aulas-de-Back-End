@@ -30,7 +30,7 @@ const corOptions = {
 //Configura as permissões da API através do CORS
 app.use(cors(corOptions))
 
-//ENDPOINTS
+//Endpoint para inserir um filme pelo ID
 app.post('/v1/senai/locadora/filme', bodyParserJSON, async function(request, response){
     //Recebe o conteúdo dentro do body da requisição (Abrindo o envelope e guardando o conteúdo da requisisição)
     let dados = request.body
@@ -43,6 +43,7 @@ app.post('/v1/senai/locadora/filme', bodyParserJSON, async function(request, res
     response.json(result)
 })
 
+//Endpoint para listar filmes
 //Só é utilizado a busca via parâmetro quando o critério de filtro for o id
 app.get('/v1/senai/locadora/filme', async function (request, response){
     let result = await controllerFilme.listarFilme()
@@ -51,6 +52,7 @@ app.get('/v1/senai/locadora/filme', async function (request, response){
     
 })
 
+//Endpoint para bucar um filme pelo ID
 app.get('/v1/senai/locadora/filme/:id', async function (request, response){
     let id = request.params.id
 
@@ -60,6 +62,7 @@ app.get('/v1/senai/locadora/filme/:id', async function (request, response){
     
 })
 
+//Endpoint para atualizar um filme pelo ID
 app.put('/v1/senai/locadora/filme/:id', bodyParserJSON, async function(request, response){
     
     //Recebe o contenty type da requisição
@@ -77,6 +80,7 @@ app.put('/v1/senai/locadora/filme/:id', bodyParserJSON, async function(request, 
     response.json(result)
 })
 
+//Endpoint para deletar um filme pelo ID
 app.delete('/v1/senai/locadora/filme/:id', async function(request, response){
     let id = request.params.id
 
