@@ -83,6 +83,7 @@ const atualizarFilme = async function(filme, id, contentType){
                         message.DEFAULT_MESSAGE.status      = message.SUCESS_UPDATED_ITEM.status
                         message.DEFAULT_MESSAGE.status_code = message.SUCESS_UPDATED_ITEM.status_code
                         message.DEFAULT_MESSAGE.message     = message.SUCESS_UPDATED_ITEM.message
+                        message.DEFAULT_MESSAGE.response    = filme
                         
                         return message.DEFAULT_MESSAGE //200 (Atualizado)
                     }else{
