@@ -14,6 +14,8 @@ const bodyParser    = require('body-parser')
 //Import das CONTROLLERS do projeto
 const controllerFilme = require('./controller/filme/controller_filme.js')
 
+const controllerGenero = require('./controller/genero/controller_genero.js')
+
 //Criando um objeto para manipular dados do body da API em formato JSON
 const bodyParserJSON = bodyParser.json()
 
@@ -93,4 +95,17 @@ app.delete('/v1/senai/locadora/filme/:id', async function(request, response){
 //Serve para inicializar a API para receber requisições
 app.listen(8080, function(){
     console.log("API funcionando e aguardando novas requisições")
+})
+
+//Endpoint para inserir um genero pelo ID
+app.post('/v1/senai/locadora/genero', bodyParserJSON, async function(request, response){
+    //Recebe o conteúdo dentro do body da requisição (Abrindo o envelope e guardando o conteúdo da requisisição)
+    let dados = request.body
+    //Recebe o content type da requisição, para validar se é um JSON
+    let contentType = request.headers['content-type']
+    
+    let result = await controllerGenero.inserirNovoGenero(dados, contentType)
+    
+    response.status(result.status_code)
+    response.json(result)
 })
