@@ -16,7 +16,23 @@ create table tbl_filme (
     capa varchar(255) 
     
 )
-show tables;
+;
+
+create table tbl_genero (
+	id int not null primary key auto_increment,
+    nome varchar(80) not null,
+    descricao text default null
+    
+);
+select * from tbl_genero;
+
+create table tbl_classificacao (
+	id int not null primary key auto_increment,
+	sigla varchar(4) not null,
+	nome varchar(40) not null,
+	descricao text default null
+);
+select * from tbl_classificacao;
 
 #Inserir dados
 insert into tbl_filme (
@@ -40,4 +56,17 @@ insert into tbl_filme (
 							'https://br.web.img3.acsta.net/c_310_420/img/5b/ea/5bea1aeac3323aeaaf82449a34fafbbf.jpg'
 );
 
-select *from tbl_filme
+select * from tbl_filme;
+select * from tbl_filme order by id desc;
+delete from tbl_filme where id > 0;
+
+update tbl_filme set
+	nome = 'filme 01',
+    data_lancamento = '2000-01-01',
+    duracao = '02:00',
+    sinopse = 'Testando o update no banco de dados',
+    avaliacao = '6.7',
+    valor = '7.6',
+    capa = 'farmar aura'
+    where id = 9;
+

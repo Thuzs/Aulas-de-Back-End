@@ -1,5 +1,5 @@
 /**********************************************************************************************
- * Objetivo: Arquivo responsavel pela criação de API de projeto de Estados e Cidades
+ * Objetivo: Arquivo responsavel pela criação de API de projeto de Filmes
  * Data: 17/04/2026
  * Autor: Arthur
  * Versão: 1.0
@@ -97,6 +97,8 @@ app.listen(8080, function(){
     console.log("API funcionando e aguardando novas requisições")
 })
 
+
+
 //Endpoint para inserir um genero pelo ID
 app.post('/v1/senai/locadora/genero', bodyParserJSON, async function(request, response){
     //Recebe o conteúdo dentro do body da requisição (Abrindo o envelope e guardando o conteúdo da requisisição)
@@ -109,3 +111,48 @@ app.post('/v1/senai/locadora/genero', bodyParserJSON, async function(request, re
     response.status(result.status_code)
     response.json(result)
 })
+
+app.put('/v1/senai/locadora/genero/:id', bodyParserJSON, async function (request, response){
+
+     //Recebe o contenty type da requisição
+     let contentType = request.headers['content-type']
+     //Recebe o ID do registro a ser atualizado
+     let id = request.params.id
+     //Recebe os dados enviado no campo da requisição
+     let dados = request.body
+     
+     //Chama a função de atualizar na controller e encaminha os dados, id e content-type
+     //obedecendo a ordem de criação na função da controller
+     let result = await controllerGenero.atualizarGenero(dados, id, contentType)
+ 
+     response.status(result.status_code)
+     response.json(result)
+    
+})
+
+app.get('/v1/senai/locadora/genero', async function (request, response){
+    let result = await controllerGenero.listarGenero()
+    response.status(result.status_code)
+    response.json(result)
+    
+})
+
+app.get('/v1/senai/locadora/genero/:id', async function (request, response){
+    let id = request.params.id
+
+    let result = await controllerGenero.buscarGenero(id)
+    response.json(result)
+    response.status(result.status_code)
+    
+})
+
+//Endpoint para deletar um genero pelo ID
+app.delete('/v1/senai/locadora/genero/:id', async function(request, response){
+    let id = request.params.id
+
+    let result = await controllerGenero.excluirGenero(id)
+
+    response.status(result.status_code)
+    response.json(result)
+})
+
