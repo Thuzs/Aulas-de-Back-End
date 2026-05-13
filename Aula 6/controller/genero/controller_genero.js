@@ -54,6 +54,7 @@ const inserirNovoGenero = async function(genero, contentType){
     }
 }
 
+//Função para atualizar um genero
 const atualizarGenero = async function(genero, id, contentType){
 
     let message = JSON.parse(JSON.stringify(config_message))
@@ -173,7 +174,7 @@ const listarGenero = async function(){
     }
 }
 
-//Função para excluir o filme
+//Função para excluir o genero
 const excluirGenero = async function(id){
     let message = JSON.parse(JSON.stringify(config_message))
 

@@ -40,7 +40,7 @@ const insertGenero = async function(genero){
 
 }
 
-//Função para atualizar um filme existente na tabela
+//Função para atualizar um genero existente na tabela
 const updateGenero = async function (genero){
     try{
         let sql = `update tbl_genero set
@@ -60,7 +60,7 @@ const updateGenero = async function (genero){
     }
 }
 
-//Função para retornar todos os dados da tabela de filme
+//Função para retornar todos os dados da tabela de genero
 const selectAllGenero = async function(){
     try {
         //Script para retornar todos os filmes
@@ -98,7 +98,7 @@ const selectByIdGenero = async function(id){
     }
 }
 
-//Função para excluir um filme pelo id
+//Função para excluir um genero pelo id
 const deleteGenero = async function(id){
     try {
         let sql = `delete from tbl_genero 

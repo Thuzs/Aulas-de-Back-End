@@ -112,6 +112,7 @@ app.post('/v1/senai/locadora/genero', bodyParserJSON, async function(request, re
     response.json(result)
 })
 
+//Endpoint para atualizar um genero pelo ID
 app.put('/v1/senai/locadora/genero/:id', bodyParserJSON, async function (request, response){
 
      //Recebe o contenty type da requisição
@@ -130,6 +131,7 @@ app.put('/v1/senai/locadora/genero/:id', bodyParserJSON, async function (request
     
 })
 
+//Endpoint para listar generos
 app.get('/v1/senai/locadora/genero', async function (request, response){
     let result = await controllerGenero.listarGenero()
     response.status(result.status_code)
@@ -137,6 +139,7 @@ app.get('/v1/senai/locadora/genero', async function (request, response){
     
 })
 
+//Endpoint para bucar um genero pelo ID
 app.get('/v1/senai/locadora/genero/:id', async function (request, response){
     let id = request.params.id
 
