@@ -17,6 +17,14 @@ create table tbl_filme (
     
 )
 ;
+create table tbl_classificacao (
+	id 			int not null auto_increment primary key,
+    sigla 		varchar (4) not null,
+    nome 		varchar(40) not null,
+    descricao	varchar(200) not null
+);
+
+
 
 create table tbl_genero (
 	id int not null primary key auto_increment,
@@ -24,15 +32,16 @@ create table tbl_genero (
     descricao text default null
     
 );
-select * from tbl_genero;
 
-create table tbl_classificacao (
+create table tbl_sexo (
 	id int not null primary key auto_increment,
-	sigla varchar(4) not null,
-	nome varchar(40) not null,
-	descricao text default null
+    sigla varchar(3) not null,
+    nome varchar(15) not null
+    
 );
-select * from tbl_classificacao;
+
+select * from tbl_genero;
+drop table tbl_genero;
 
 #Inserir dados
 insert into tbl_filme (
@@ -42,7 +51,9 @@ insert into tbl_filme (
 						sinopse, 
 						avaliacao, 
 						valor, 
-						capa)
+						capa,
+                        id_classificacao
+                        )
 					values (
 							'Super Mario Galaxy: O Filme',
 							'2026-04-02',
@@ -53,7 +64,8 @@ insert into tbl_filme (
 							depois de salvar o Reino dos Cogumelos.',
 							'3',
 							'50.70',
-							'https://br.web.img3.acsta.net/c_310_420/img/5b/ea/5bea1aeac3323aeaaf82449a34fafbbf.jpg'
+							'https://br.web.img3.acsta.net/c_310_420/img/5b/ea/5bea1aeac3323aeaaf82449a34fafbbf.jpg',
+							1
 );
 
 select * from tbl_filme;
@@ -70,3 +82,27 @@ update tbl_filme set
     capa = 'farmar aura'
     where id = 9;
 
+#Adicionar a coluna da FK e Criar a relação com a tabela de classificação
+alter table tbl_filme
+	add column id_classificacao int not null,
+    add constraint FK_CLASSIFICACAO_FILME
+		foreign key (id_classificacao)
+        references tbl_classificacao(id);
+        
+	select * from tbl_filme;
+	delete from tbl_filme;
+    
+    show tables;
+    desc tbl_classificacao;
+    
+    insert into tbl_classificacao (sigla, nome, descricao)
+		values	('L', "Livre", 'Filme de classificação livre.'),
+				('18', "Maior de 18 anos", "Conteúdo sensível para menores de 18 anos.");
+                
+select * from tbl_classificacao;
+
+select	tbl_filme.nome as nome_filme, tbl_filme.sinopse, tbl_filme.data_lancamento, tbl_filme.capa,
+		tbl_classificacao.sigla, tbl_classificacao.nome as nome_classificacao
+from tbl_filme
+	inner join tbl_classificacao
+		on tbl_classificacao.id = tbl_filme.id_classificacao;
