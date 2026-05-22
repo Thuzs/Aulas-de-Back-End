@@ -15,6 +15,12 @@ const config_message = require("../modulo/configMessages.js")
 //Import do arquivo DAO para fazer o CRUD do filme no banco de dados
 const filmeDAO = require('../../model/DAO/filme/filme.js')
 
+//Import de arquivos de Controller
+const controller_classificacao = require('../classificacao/controller_classificacao.js')
+
+//Import de arquivos de Controller
+const controller_genero_filme = require('./controller_genero_filme.js')
+
 //Função para inserir novo filme
 const inserirNovoFilme = async function(filme, contentType){
 
@@ -37,6 +43,19 @@ const inserirNovoFilme = async function(filme, contentType){
                 //Criando o atributo ID no JSON do filme e colocando
                 //o ID gerado após o insert
                 filme.id = result
+
+                for (genero of filme.genero){
+                //Manipulação de dados para inserir os Generos do Filme
+                let generoFilme = {"id_filme": filme.id,
+                                    "id_genero": genero.id
+                                }
+                    //Chama a controller do filme genero para inserir os IDs
+                    let resultInsertGenero = await controller_genero_filme.inserirNovoGeneroFilme(generoFilme)
+                    
+                    if(!resultInsertGenero.status){
+                        return message.SUCESS_CREATED_ITEM_WARNING //201 com alerta de dados não encotrado
+                    }
+                }
                 message.DEFAULT_MESSAGE.status      = message.SUCESS_CREATED_ITEM.status
                 message.DEFAULT_MESSAGE.status_code = message.SUCESS_CREATED_ITEM.status_code
                 message.DEFAULT_MESSAGE.message     = message.SUCESS_CREATED_ITEM.message
@@ -121,6 +140,27 @@ const listarFilme = async function(){
         if(result){
             //Validação para verificar se existe conteúdo no array
             if(result.length > 0 ){
+
+                //Percorre o ARRAY de filmes para identificar os dados da classificação
+                for(filme of result){
+                    //Busca na controller da classificação o id referente aos dados
+                    let resultclassificacao = await controller_classificacao.buscarClassificacao(filme.id_classificacao)
+                    //Se a classificação foi encontrada
+                    if(resultclassificacao.status){
+                        //Cria o atributo classificação no filme e adiciona os dados referente
+                        //a classificação
+                        filme.classificacao = resultclassificacao.response.classificacao
+                        //Apaga o atributo id_classificação do filme para não ficar repetido
+                        delete filme.id_classificacao
+                    }
+
+                    //Cria o objeto de Generos relacionados ao filme
+                    let resultGenero = await controller_genero_filme.buscarGeneroIdFilme(filme.id)
+                    if(resultGenero.status){
+                        filme.genero = resultGenero.response.genero_filme
+                    }
+                }
+
                 message.DEFAULT_MESSAGE.status          = message.SUCESS_RESPONSE.status
                 message.DEFAULT_MESSAGE.status_code     = message.SUCESS_RESPONSE.status_code
                 message.DEFAULT_MESSAGE.response.count  = result.length
@@ -156,6 +196,22 @@ const buscarFilme = async function(id){
 
             if(result){
                 if(result.length > 0){
+
+                //Percorre o ARRAY de filmes para identificar os dados da classificação
+                for(filme of result){
+                    //Busca na controller da classificação o id referente aos dados
+                    let resultclassificacao = await controller_classificacao.buscarClassificacao(filme.id_classificacao)
+                    //Se a classificação foi encontrada
+                    if(resultclassificacao.status){
+                        //Cria o atributo classificação no filme e adiciona os dados referente
+                        //a classificação
+                        filme.classificacao = resultclassificacao.response.classificacao
+                        //Apaga o atributo id_classificação do filme para não ficar repetido
+                        delete filme.id_classificacao
+
+                    }
+                }
+                    
                     message.DEFAULT_MESSAGE.status          = message.SUCESS_RESPONSE.status
                     message.DEFAULT_MESSAGE.status_code     = message.SUCESS_RESPONSE.status_code
                     message.DEFAULT_MESSAGE.response.filme  = result
@@ -237,6 +293,11 @@ const validarDados = async function(filme, contentType){
 
         }else if(filme.capa.length > 255){
             message.ERROR_BAD_REQUEST.field = '[CAPA] INVÁLIDO'
+            return message.ERROR_BAD_REQUEST
+
+            //Validação para a FK de
+        }else if(filme.id_classificacao == undefined || filme.id_classificacao == '' || filme.id_classificacao == null || isNaN(filme.id_classificacao) || filme.id_classificacao <= 0){
+            message.ERROR_BAD_REQUEST.field = '[ID_CLASSSIFICACAO) INVÁLIDO'
             return message.ERROR_BAD_REQUEST
 
         }else{

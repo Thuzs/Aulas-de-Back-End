@@ -18,6 +18,8 @@ const controllerGenero = require('./controller/genero/controller_genero.js')
 
 const controllerSexo = require('./controller/sexo/controller_sexo.js')
 
+const controllerClassificacao = require('./controller/classificacao/controller_classificacao.js')
+
 //Criando um objeto para manipular dados do body da API em formato JSON
 const bodyParserJSON = bodyParser.json()
 
@@ -34,7 +36,8 @@ const corOptions = {
 //Configura as permissões da API através do CORS
 app.use(cors(corOptions))
 
-//Endpoint para inserir um filme pelo ID
+//FILME
+//Endpoint para inserir um Filme
 app.post('/v1/senai/locadora/filme', bodyParserJSON, async function(request, response){
     //Recebe o conteúdo dentro do body da requisição (Abrindo o envelope e guardando o conteúdo da requisisição)
     let dados = request.body
@@ -47,7 +50,7 @@ app.post('/v1/senai/locadora/filme', bodyParserJSON, async function(request, res
     response.json(result)
 })
 
-//Endpoint para listar filmes
+//Endpoint para listar os Filmes
 //Só é utilizado a busca via parâmetro quando o critério de filtro for o id
 app.get('/v1/senai/locadora/filme', async function (request, response){
     let result = await controllerFilme.listarFilme()
@@ -56,7 +59,7 @@ app.get('/v1/senai/locadora/filme', async function (request, response){
     
 })
 
-//Endpoint para bucar um filme pelo ID
+//Endpoint para buscar um Filme pelo ID
 app.get('/v1/senai/locadora/filme/:id', async function (request, response){
     let id = request.params.id
 
@@ -66,7 +69,7 @@ app.get('/v1/senai/locadora/filme/:id', async function (request, response){
     
 })
 
-//Endpoint para atualizar um filme pelo ID
+//Endpoint para atualizar um Filme pelo ID
 app.put('/v1/senai/locadora/filme/:id', bodyParserJSON, async function(request, response){
     
     //Recebe o contenty type da requisição
@@ -84,7 +87,7 @@ app.put('/v1/senai/locadora/filme/:id', bodyParserJSON, async function(request, 
     response.json(result)
 })
 
-//Endpoint para deletar um filme pelo ID
+//Endpoint para deletar um Filme pelo ID
 app.delete('/v1/senai/locadora/filme/:id', async function(request, response){
     let id = request.params.id
 
@@ -94,14 +97,9 @@ app.delete('/v1/senai/locadora/filme/:id', async function(request, response){
     response.json(result)
 })
 
-//Serve para inicializar a API para receber requisições
-app.listen(8080, function(){
-    console.log("API funcionando e aguardando novas requisições")
-})
 
-
-
-//Endpoint para inserir um genero pelo ID
+//GENERO
+//Endpoint para inserir um Genero
 app.post('/v1/senai/locadora/genero', bodyParserJSON, async function(request, response){
     //Recebe o conteúdo dentro do body da requisição (Abrindo o envelope e guardando o conteúdo da requisisição)
     let dados = request.body
@@ -114,7 +112,7 @@ app.post('/v1/senai/locadora/genero', bodyParserJSON, async function(request, re
     response.json(result)
 })
 
-//Endpoint para atualizar um genero pelo ID
+//Endpoint para atualizar um Genero pelo ID
 app.put('/v1/senai/locadora/genero/:id', bodyParserJSON, async function (request, response){
 
      //Recebe o contenty type da requisição
@@ -133,7 +131,7 @@ app.put('/v1/senai/locadora/genero/:id', bodyParserJSON, async function (request
     
 })
 
-//Endpoint para listar generos
+//Endpoint para listar os Generos
 app.get('/v1/senai/locadora/genero', async function (request, response){
     let result = await controllerGenero.listarGenero()
     response.status(result.status_code)
@@ -141,7 +139,7 @@ app.get('/v1/senai/locadora/genero', async function (request, response){
     
 })
 
-//Endpoint para bucar um genero pelo ID
+//Endpoint para buscar um Genero pelo ID
 app.get('/v1/senai/locadora/genero/:id', async function (request, response){
     let id = request.params.id
 
@@ -151,7 +149,7 @@ app.get('/v1/senai/locadora/genero/:id', async function (request, response){
     
 })
 
-//Endpoint para deletar um genero pelo ID
+//Endpoint para deletar um Genero pelo ID
 app.delete('/v1/senai/locadora/genero/:id', async function(request, response){
     let id = request.params.id
 
@@ -163,8 +161,8 @@ app.delete('/v1/senai/locadora/genero/:id', async function(request, response){
 
 
 
-
-//Endpoint para inserir um sexo pelo ID
+//SEXO
+//Endpoint para inserir um Sexo
 app.post('/v1/senai/locadora/sexo', bodyParserJSON, async function(request, response){
     //Recebe o conteúdo dentro do body da requisição (Abrindo o envelope e guardando o conteúdo da requisisição)
     let dados = request.body
@@ -177,7 +175,7 @@ app.post('/v1/senai/locadora/sexo', bodyParserJSON, async function(request, resp
     response.json(result)
 })
 
-//Endpoint para listar sexos
+//Endpoint para listar todos os Sexos
 app.get('/v1/senai/locadora/sexo', async function (request, response){
     let result = await controllerSexo.listarSexo()
     response.status(result.status_code)
@@ -185,7 +183,7 @@ app.get('/v1/senai/locadora/sexo', async function (request, response){
     
 })
 
-//Endpoint para bucar um sexo pelo ID
+//Endpoint para buscar um Sexo pelo ID
 app.get('/v1/senai/locadora/sexo/:id', async function (request, response){
     let id = request.params.id
 
@@ -195,7 +193,7 @@ app.get('/v1/senai/locadora/sexo/:id', async function (request, response){
     
 })
 
-//Endpoint para atualizar um sexo pelo ID
+//Endpoint para atualizar um Sexo pelo ID
 app.put('/v1/senai/locadora/sexo/:id', bodyParserJSON, async function (request, response){
 
     //Recebe o contenty type da requisição
@@ -214,7 +212,7 @@ app.put('/v1/senai/locadora/sexo/:id', bodyParserJSON, async function (request, 
    
 })
 
-//Endpoint para deletar um sexpo pelo ID
+//Endpoint para deletar um Sexo pelo ID
 app.delete('/v1/senai/locadora/sexo/:id', async function(request, response){
     let id = request.params.id
 
@@ -222,4 +220,72 @@ app.delete('/v1/senai/locadora/sexo/:id', async function(request, response){
 
     response.status(result.status_code)
     response.json(result)
+})
+
+
+//CLASSIFICACAO
+//Endpoint para Inserir uma Classificação
+app.post('/v1/senai/locadora/classificacao', bodyParserJSON, async function(request, response){
+    //Recebe o conteúdo dentro do body da requisição
+    let dados = request.body
+    
+    //Recebe o content type da requisição, para validar se é um JSON
+    let contentType = request.headers['content-type']
+
+    let result = await controllerClassificacao.inserirNovoClassificacao(dados, contentType)
+   
+    response.status(result.status_code)
+    response.json(result)
+})
+
+//Endpoint para Listar todos as Classificações
+app.get('/v1/senai/locadora/classificacao', async function(request, response){
+    let result = await controllerClassificacao.listarClassificacao()
+
+    response.status(result.status_code)
+    response.json(result)
+})
+
+//Endpoint para Buscar uma Classificação pelo ID
+app.get('/v1/senai/locadora/classificacao/:id', async function(request, response){
+    //Recebe o ID via parametro
+    let id = request.params.id
+
+    let result = await controllerClassificacao.buscarClassificacao(id)
+
+    response.status(result.status_code)
+    response.json(result)
+})
+
+//Endpoint para Atualizar uma Classificação pelo ID
+app.put('/v1/senai/locadora/classificacao/:id', bodyParserJSON, async function(request, response){
+    //Recebe o contenty type da requisição
+    let contentType = request.headers['content-type']
+    //Recebe o ID do registro a ser atualizado
+    let id = request.params.id
+    //Recebe os dados enviados no corpo da requisição
+    let dados = request.body
+
+    //Chama a função de atualizar na controller e encaminha os dados, id e content-type
+    //obedecendo a ordem de criação na função da controller
+    let result = await controllerClassificacao.atualizarClassificacao(dados, id, contentType)
+
+    response.status(result.status_code)
+    response.json(result)
+})
+
+//Endpoint para Deletar uma Classificação pelo ID
+app.delete('/v1/senai/locadora/classificacao/:id', async function(request, response){
+    let id = request.params.id
+
+    let result = await controllerClassificacao.excluirClassificacao(id)
+
+    response.status(result.status_code)
+    response.json(result)
+})
+
+
+//Serve para inicializar a API para receber requisições
+app.listen(8080, function(){
+    console.log("API funcionando e aguardando novas requisições")
 })

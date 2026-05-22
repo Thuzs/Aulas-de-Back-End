@@ -25,7 +25,8 @@ const insertFilme = async function(filme){
                 sinopse, 
                 avaliacao, 
                 valor, 
-                capa
+                capa,
+                id_classificacao
                 )
         values (
                 '${filme.nome}',
@@ -34,7 +35,8 @@ const insertFilme = async function(filme){
                 '${filme.sinopse}',
                 if('${filme.avaliacao}' = "", null, '${filme.avaliacao}'),
                 '${filme.valor}',
-                '${filme.capa}'
+                '${filme.capa}',
+                '${filme.id_classificacao}'
                 );`
 
 
@@ -61,7 +63,8 @@ const updateFilme = async function(filme){
                                 sinopse = '${filme.sinopse}',
                                 avaliacao = if('${filme.avaliacao}' = "", null, '${filme.avaliacao}'),
                                 valor = '${filme.valor}',
-                                capa = '${filme.capa}'
+                                capa = '${filme.capa}',
+                                id_classificacao = ${filme.id_classificacao}
                                 where id = ${filme.id};`
     
             //Executa o script SQL no BD

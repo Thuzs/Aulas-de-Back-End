@@ -24,7 +24,7 @@ create table tbl_classificacao (
     descricao	varchar(200) not null
 );
 
-
+select * from tbl_classificacao;
 
 create table tbl_genero (
 	id int not null primary key auto_increment,
@@ -38,6 +38,9 @@ create table tbl_sexo (
     sigla varchar(3) not null,
     nome varchar(15) not null
     
+);
+create table tbl_genero_filme(
+	id int not null primary key auto_increment
 );
 
 select * from tbl_genero;
@@ -55,7 +58,7 @@ insert into tbl_filme (
                         id_classificacao
                         )
 					values (
-							'Super Mario Galaxy: O Filme',
+							'pacman',
 							'2026-04-02',
 							'01:39:00',
 							'Uma nova aventura leva Mario a enfrentar um inédito e ameaçador super vilão.
@@ -65,7 +68,7 @@ insert into tbl_filme (
 							'3',
 							'50.70',
 							'https://br.web.img3.acsta.net/c_310_420/img/5b/ea/5bea1aeac3323aeaaf82449a34fafbbf.jpg',
-							1
+							3
 );
 
 select * from tbl_filme;
@@ -106,3 +109,16 @@ select	tbl_filme.nome as nome_filme, tbl_filme.sinopse, tbl_filme.data_lancament
 from tbl_filme
 	inner join tbl_classificacao
 		on tbl_classificacao.id = tbl_filme.id_classificacao;
+        
+alter table tbl_genero_filme
+	add column id_filme int not null,
+    add constraint FK_FILME_GENERO
+		foreign key (id_filme)
+        references tbl_filme(id);
+        
+alter table tbl_genero_filme
+	add column id_genero int not null,
+    add constraint FK_GENERO_FILME
+		foreign key (id_genero)
+        references tbl_genero(id);
+        select * from tbl_genero_filme
