@@ -121,4 +121,6 @@ alter table tbl_genero_filme
     add constraint FK_GENERO_FILME
 		foreign key (id_genero)
         references tbl_genero(id);
-        select * from tbl_genero_filme
+        select * from tbl_genero_filme;
+        
+        select * from tbl_classificacao

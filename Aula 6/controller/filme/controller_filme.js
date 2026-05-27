@@ -38,12 +38,13 @@ const inserirNovoFilme = async function(filme, contentType){
             //Encaminha os dados do filme par ao DAO
             let result = await filmeDAO.insertFilme(filme)
 
-
+            //Manipulação de dados para inserir os Generos do filme
             if(result){ //201
                 //Criando o atributo ID no JSON do filme e colocando
                 //o ID gerado após o insert
                 filme.id = result
 
+                //Manipualação de dados para inserir os Generos do filme
                 for (genero of filme.genero){
                 //Manipulação de dados para inserir os Generos do Filme
                 let generoFilme = {"id_filme": filme.id,
@@ -99,6 +100,27 @@ const atualizarFilme = async function(filme, id, contentType){
                     let result = await filmeDAO.updateFilme(filme)
 
                     if(result){
+
+                        //Manipulação de dados na tabela de relação entre filme e genero
+                        let resultDeleteGenero = await controller_genero_filme.excluirGenerosByIdFilme(filme.id)
+                        
+                        //Após a exclusão de todos os generos relacionados com o filme
+                        if(resultDeleteGenero.status){
+
+                            for (genero of filme.genero){
+                                //Manipulação de dados para inserir os Generos do Filme
+                                let generoFilme = {"id_filme": filme.id,
+                                                    "id_genero": genero.id
+                                                }
+                                    //Chama a controller do filme genero para inserir os IDs
+                                    let resultInsertGenero = await controller_genero_filme.inserirNovoGeneroFilme(generoFilme)
+                                    
+                                    if(!resultInsertGenero.status){
+                                        return message.SUCESS_CREATED_ITEM_WARNING //201 com alerta de dados não encotrado
+                                    }
+                            }
+                        }
+
                         message.DEFAULT_MESSAGE.status      = message.SUCESS_UPDATED_ITEM.status
                         message.DEFAULT_MESSAGE.status_code = message.SUCESS_UPDATED_ITEM.status_code
                         message.DEFAULT_MESSAGE.message     = message.SUCESS_UPDATED_ITEM.message
@@ -209,6 +231,12 @@ const buscarFilme = async function(id){
                         //Apaga o atributo id_classificação do filme para não ficar repetido
                         delete filme.id_classificacao
 
+                    }
+
+                    //Cria o objeto de Generos relacionados ao filme
+                    let resultGenero = await controller_genero_filme.buscarGeneroIdFilme(filme.id)
+                    if(resultGenero.status){
+                        filme.genero = resultGenero.response.genero_filme
                     }
                 }
                     
