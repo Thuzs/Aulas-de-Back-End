@@ -20,6 +20,8 @@ const controllerSexo = require('./controller/sexo/controller_sexo.js')
 
 const controllerClassificacao = require('./controller/classificacao/controller_classificacao.js')
 
+const controllerAtividade = require('./controller/atividade/controller_atividade.js')
+
 //Criando um objeto para manipular dados do body da API em formato JSON
 const bodyParserJSON = bodyParser.json()
 
@@ -160,7 +162,6 @@ app.delete('/v1/senai/locadora/genero/:id', async function(request, response){
 })
 
 
-
 //SEXO
 //Endpoint para inserir um Sexo
 app.post('/v1/senai/locadora/sexo', bodyParserJSON, async function(request, response){
@@ -223,6 +224,7 @@ app.delete('/v1/senai/locadora/sexo/:id', async function(request, response){
 })
 
 
+
 //CLASSIFICACAO
 //Endpoint para Inserir uma Classificação
 app.post('/v1/senai/locadora/classificacao', bodyParserJSON, async function(request, response){
@@ -279,6 +281,68 @@ app.delete('/v1/senai/locadora/classificacao/:id', async function(request, respo
     let id = request.params.id
 
     let result = await controllerClassificacao.excluirClassificacao(id)
+
+    response.status(result.status_code)
+    response.json(result)
+})
+
+
+//ATIVIDADE
+//Endpoint para inserir um Atividade
+app.post('/v1/senai/locadora/atividade', bodyParserJSON, async function(request, response){
+    //Recebe o conteúdo dentro do body da requisição (Abrindo o envelope e guardando o conteúdo da requisisição)
+    let dados = request.body
+    //Recebe o content type da requisição, para validar se é um JSON
+    let contentType = request.headers['content-type']
+    
+    let result = await controllerAtividade.inserirNovaAtividade(dados, contentType)
+    
+    response.status(result.status_code)
+    response.json(result)
+})
+
+//Endpoint para listar todos os atividades
+app.get('/v1/senai/locadora/atividade', async function (request, response){
+    let result = await controllerAtividade.listarAtividade()
+    response.status(result.status_code)
+    response.json(result)
+    
+})
+
+//Endpoint para buscar um atividade pelo ID
+app.get('/v1/senai/locadora/atividade/:id', async function (request, response){
+    let id = request.params.id
+
+    let result = await controllerAtividade.buscarAtividade(id)
+    response.json(result)
+    response.status(result.status_code)
+    
+})
+
+//Endpoint para atualizar um atividade pelo ID
+app.put('/v1/senai/locadora/atividade/:id', bodyParserJSON, async function (request, response){
+
+    //Recebe o contenty type da requisição
+    let contentType = request.headers['content-type']
+    //Recebe o ID do registro a ser atualizado
+    let id = request.params.id
+    //Recebe os dados enviado no campo da requisição
+    let dados = request.body
+    
+    //Chama a função de atualizar na controller e encaminha os dados, id e content-type
+    //obedecendo a ordem de criação na função da controller
+    let result = await controllerAtividade.atualizarAtividade(dados, id, contentType)
+
+    response.status(result.status_code)
+    response.json(result)
+   
+})
+
+//Endpoint para deletar um atividade pelo ID
+app.delete('/v1/senai/locadora/atividade/:id', async function(request, response){
+    let id = request.params.id
+
+    let result = await controllerAtividade.excluirAtividade(id)
 
     response.status(result.status_code)
     response.json(result)
