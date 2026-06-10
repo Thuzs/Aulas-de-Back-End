@@ -12,11 +12,8 @@ const cors          = require('cors')
 const bodyParser    = require('body-parser')
 
 //Import das CONTROLLERS do projeto
-const controllerFilme = require('./controller/filme/controller_filme.js')
 
-const controllerGenero = require('./controller/genero/controller_genero.js')
 
-const controllerSexo = require('./controller/sexo/controller_sexo.js')
 
 const controllerClassificacao = require('./controller/classificacao/controller_classificacao.js')
 
@@ -40,191 +37,30 @@ const corOptions = {
 //Configura as permissões da API através do CORS
 app.use(cors(corOptions))
 
+//Imports
 //FILME
-//Endpoint para inserir um Filme
-app.post('/v1/senai/locadora/filme', bodyParserJSON, async function(request, response){
-    //Recebe o conteúdo dentro do body da requisição (Abrindo o envelope e guardando o conteúdo da requisisição)
-    let dados = request.body
-    //Recebe o content type da requisição, para validar se é um JSON
-    let contentType = request.headers['content-type']
-    
-    let result = await controllerFilme.inserirNovoFilme(dados, contentType)
-    
-    response.status(result.status_code)
-    response.json(result)
-})
+const filmeRouter = require('./routes/filme.routes.js')
 
-//Endpoint para listar os Filmes
-//Só é utilizado a busca via parâmetro quando o critério de filtro for o id
-app.get('/v1/senai/locadora/filme', async function (request, response){
-    let result = await controllerFilme.listarFilme()
-    response.status(result.status_code)
-    response.json(result)
-    
-})
-
-//Endpoint para buscar um Filme pelo ID
-app.get('/v1/senai/locadora/filme/:id', async function (request, response){
-    let id = request.params.id
-
-    let result = await controllerFilme.buscarFilme(id)
-    response.json(result)
-    response.status(result.status_code)
-    
-})
-
-//Endpoint para atualizar um Filme pelo ID
-app.put('/v1/senai/locadora/filme/:id', bodyParserJSON, async function(request, response){
-    
-    //Recebe o contenty type da requisição
-    let contentType = request.headers['content-type']
-    //Recebe o ID do registro a ser atualizado
-    let id = request.params.id
-    //Recebe os dados enviado no campo da requisição
-    let dados = request.body
-    
-    //Chama a função de atualizar na controller e encaminha os dados, id e content-type
-    //obedecendo a ordem de criação na função da controller
-    let result = await controllerFilme.atualizarFilme(dados, id, contentType)
-
-    response.status(result.status_code)
-    response.json(result)
-})
-
-//Endpoint para deletar um Filme pelo ID
-app.delete('/v1/senai/locadora/filme/:id', async function(request, response){
-    let id = request.params.id
-
-    let result = await controllerFilme.excluirFilme(id)
-
-    response.status(result.status_code)
-    response.json(result)
-})
+//Endpoint
+app.use('/v1/senai/locadora/filme', cors(), filmeRouter)
 
 
+
+//Imports
 //GENERO
-//Endpoint para inserir um Genero
-app.post('/v1/senai/locadora/genero', bodyParserJSON, async function(request, response){
-    //Recebe o conteúdo dentro do body da requisição (Abrindo o envelope e guardando o conteúdo da requisisição)
-    let dados = request.body
-    //Recebe o content type da requisição, para validar se é um JSON
-    let contentType = request.headers['content-type']
-    
-    let result = await controllerGenero.inserirNovoGenero(dados, contentType)
-    
-    response.status(result.status_code)
-    response.json(result)
-})
+const generoRouter = require('./routes/genero.routes.js')
 
-//Endpoint para atualizar um Genero pelo ID
-app.put('/v1/senai/locadora/genero/:id', bodyParserJSON, async function (request, response){
-
-     //Recebe o contenty type da requisição
-     let contentType = request.headers['content-type']
-     //Recebe o ID do registro a ser atualizado
-     let id = request.params.id
-     //Recebe os dados enviado no campo da requisição
-     let dados = request.body
-     
-     //Chama a função de atualizar na controller e encaminha os dados, id e content-type
-     //obedecendo a ordem de criação na função da controller
-     let result = await controllerGenero.atualizarGenero(dados, id, contentType)
- 
-     response.status(result.status_code)
-     response.json(result)
-    
-})
-
-//Endpoint para listar os Generos
-app.get('/v1/senai/locadora/genero', async function (request, response){
-    let result = await controllerGenero.listarGenero()
-    response.status(result.status_code)
-    response.json(result)
-    
-})
-
-//Endpoint para buscar um Genero pelo ID
-app.get('/v1/senai/locadora/genero/:id', async function (request, response){
-    let id = request.params.id
-
-    let result = await controllerGenero.buscarGenero(id)
-    response.json(result)
-    response.status(result.status_code)
-    
-})
-
-//Endpoint para deletar um Genero pelo ID
-app.delete('/v1/senai/locadora/genero/:id', async function(request, response){
-    let id = request.params.id
-
-    let result = await controllerGenero.excluirGenero(id)
-
-    response.status(result.status_code)
-    response.json(result)
-})
+//Endpoint
+app.use('/v1/senai/locadora/genero', cors(), generoRouter)
 
 
+
+//Imports
 //SEXO
-//Endpoint para inserir um Sexo
-app.post('/v1/senai/locadora/sexo', bodyParserJSON, async function(request, response){
-    //Recebe o conteúdo dentro do body da requisição (Abrindo o envelope e guardando o conteúdo da requisisição)
-    let dados = request.body
-    //Recebe o content type da requisição, para validar se é um JSON
-    let contentType = request.headers['content-type']
-    
-    let result = await controllerSexo.inserirNovoSexo(dados, contentType)
-    
-    response.status(result.status_code)
-    response.json(result)
-})
+const sexoRouter = require('./routes/sexo.routes.js')
 
-//Endpoint para listar todos os Sexos
-app.get('/v1/senai/locadora/sexo', async function (request, response){
-    let result = await controllerSexo.listarSexo()
-    response.status(result.status_code)
-    response.json(result)
-    
-})
-
-//Endpoint para buscar um Sexo pelo ID
-app.get('/v1/senai/locadora/sexo/:id', async function (request, response){
-    let id = request.params.id
-
-    let result = await controllerSexo.buscarSexo(id)
-    response.json(result)
-    response.status(result.status_code)
-    
-})
-
-//Endpoint para atualizar um Sexo pelo ID
-app.put('/v1/senai/locadora/sexo/:id', bodyParserJSON, async function (request, response){
-
-    //Recebe o contenty type da requisição
-    let contentType = request.headers['content-type']
-    //Recebe o ID do registro a ser atualizado
-    let id = request.params.id
-    //Recebe os dados enviado no campo da requisição
-    let dados = request.body
-    
-    //Chama a função de atualizar na controller e encaminha os dados, id e content-type
-    //obedecendo a ordem de criação na função da controller
-    let result = await controllerSexo.atualizarSexo(dados, id, contentType)
-
-    response.status(result.status_code)
-    response.json(result)
-   
-})
-
-//Endpoint para deletar um Sexo pelo ID
-app.delete('/v1/senai/locadora/sexo/:id', async function(request, response){
-    let id = request.params.id
-
-    let result = await controllerSexo.excluirSexo(id)
-
-    response.status(result.status_code)
-    response.json(result)
-})
-
+//Endpoint
+app.use('/v1/senai/locadora/sexo', cors(), sexoRouter)
 
 
 //CLASSIFICACAO
